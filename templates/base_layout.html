@@ -1,0 +1,63 @@
+{% load static from staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Blog Site</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+	<header class="wrapper">
+	<div class="image-logo"><a href="{% url 'home' %}"><img src="{% static 'logo2.jpg' %}"></a></div>
+
+	<nav>
+		<ul>
+			{% if user.is_authenticated %}
+			<li>
+				<form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+					{% csrf_token %}
+					<button type="submit">Logout</button>
+				</form>
+			</li>
+			
+			<li><a href="{% url 'articles:create' %}" class="highlight">New Article</a></li>
+
+			{% else %}
+				<li><a href="{% url 'accounts:login' %}">Login</a></li>
+				<li><a href="{% url 'accounts:signup' %}">SignUp</a></li>
+
+			{% endif %}
+		</ul>
+	</nav>	
+	
+	</header>
+
+	
+
+	<!--
+	<div class="sk-folding-cube">
+	  <div class="sk-cube1 sk-cube"></div>
+	  <div class="sk-cube2 sk-cube"></div>
+	  <div class="sk-cube4 sk-cube"></div>
+	  <div class="sk-cube3 sk-cube"></div>
+	</div>
+	-->
+
+
+
+
+
+
+
+
+
+
+
+	<div class="wrapper">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+</body>
+</html>
